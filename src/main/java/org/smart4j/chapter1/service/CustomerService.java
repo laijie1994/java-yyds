@@ -42,7 +42,7 @@ public class CustomerService {
      * @Date 4:18 下午 2021/11/29
      **/
     public Customer getCustomer(long id) {
-        String sql = "select * from customer where id=?";
+        String sql = "select * from customer where id = " + id;
         return DatabaseHelper.queryEntity(Customer.class, sql);
     }
 

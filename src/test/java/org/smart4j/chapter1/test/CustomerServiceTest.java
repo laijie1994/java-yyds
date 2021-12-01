@@ -3,6 +3,7 @@ package org.smart4j.chapter1.test;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.smart4j.chapter1.helper.DatabaseHelper;
 import org.smart4j.chapter1.model.Customer;
 import org.smart4j.chapter1.service.CustomerService;
 
@@ -26,7 +27,7 @@ public class CustomerServiceTest {
 
     @Before
     public void init() {
-        // TODO: 2021/11/29 初始化数据库
+        DatabaseHelper.executeSqlFile("sql/customer_init.sql");
     }
 
     @Test
@@ -37,7 +38,7 @@ public class CustomerServiceTest {
 
     @Test
     public void getCustomerTest() {
-        long id = 1;
+        long id = 2;
         Customer customer = customerService.getCustomer(id);
         Assert.assertNotNull(customer);
     }
@@ -48,13 +49,14 @@ public class CustomerServiceTest {
         hashMap.put("name", "customer100");
         hashMap.put("contact", "John");
         hashMap.put("telephone", "13566489898");
+        hashMap.put("email", "John@gmail.com");
         boolean result = customerService.createCustomer(hashMap);
         Assert.assertTrue(result);
     }
 
     @Test
     public void updateCustomerTest() {
-        long id = 1;
+        long id = 2;
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("remark", "我改备注了哈");
         boolean result = customerService.updateCustomer(id, hashMap);
@@ -63,7 +65,7 @@ public class CustomerServiceTest {
 
     @Test
     public void deleteCustomerTest() {
-        long id = 1;
+        long id = 4;
         boolean result = customerService.deleteCustomer(id);
         Assert.assertTrue(result);
     }
